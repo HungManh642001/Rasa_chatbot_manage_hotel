@@ -1,0 +1,284 @@
+version: "3.0"
+
+stories:
+- story: interactive
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: book_room
+    - action: book_room_form
+    - active_loop: book_room_form
+    - slot_was_set: 
+      - requested_slot: adults
+    - slot_was_set: 
+      - requested_slot: child
+    - slot_was_set: 
+      - requested_slot: name
+    - slot_was_set: 
+      - requested_slot: email
+    - slot_was_set: 
+      - requested_slot: number
+    - slot_was_set: 
+      - requested_slot: room
+    - slot_was_set: 
+      - requested_slot: room_type
+    - slot_was_set: 
+      - requested_slot: date
+    - slot_was_set: 
+      - requested_slot: period
+    - slot_was_set:
+      - requested_slot: null
+    - active_loop: null
+    - action: utter_submit
+    
+- story: greet
+  steps:
+    - intent: greet
+    - action: utter_greet
+
+- story: goodbye
+  steps:
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: faq check in time affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_check_in_time
+    - action: utter_check_in_time
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq check out time 
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_check_out_time
+    - action: utter_check_out_time
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq cancel reservation affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_cancel_reservation
+    - action: utter_cancel_reservation
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq cancel policy affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_cancel_policy
+    - action: utter_cancel_policy
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq restaurant affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_restaurant
+    - action: utter_restaurant
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq restaurant time affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_restaurant_time
+    - action: utter_restaurant_time
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq breakfast affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_breakfast
+    - action: utter_breakfast
+    - intent: thankyou
+    - action: utter_thankyou 
+
+
+- story: faq breakfast time affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_breakfast_time
+    - action: utter_breakfast_time
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq reception policy affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_reception_time
+    - action: utter_reception_time
+    - intent: faq_contact_number
+    - action: utter_contact_number
+    - intent: thankyou
+    - action: utter_thankyou 
+    
+- story: faq pet policy
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_pet_policy
+    - action: utter_pet_policy
+    - intent: faq_pet_care_cost
+    - action: utter_pet_care_cost
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq nearest airport affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_nearest_airport
+    - action: utter_nearest_airport
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq contact number
+  steps: 
+    - intent: faq_contact_number
+    - action: utter_contact_number
+    
+- story: faq luggage affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_luggage
+    - action: utter_luggage
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq parking affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_parking
+    - action: utter_parking
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq swimming pool
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_swimming_pool
+    - action: utter_swimming_pool
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq address hotel 
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_address_hotel
+    - action: utter_address_hotel
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq wifi
+  steps:
+    - intent: greet 
+    - action: utter_greet
+    - intent: faq_wifi
+    - action: utter_wifi
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq baby care
+  steps: 
+    - intent: greet 
+    - action: utter_greet
+    - intent: faq_baby_care
+    - action: utter_baby_care
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq baby policy affirm
+  steps: 
+    - intent: greet 
+    - action: utter_greet
+    - intent: faq_baby_policy
+    - action: utter_baby_policy
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq gym
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_gym
+    - action: utter_gym
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq hotel info
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_hotel_info
+    - action: utter_hotel_info
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: vip room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: vip_room_details
+    - action: utter_vip_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: luxury suite room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: luxury_suite_room_details
+    - action: utter_luxury_suite_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: twin room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: twin_room_details
+    - action: utter_twin_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: double room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: double_room_details
+    - action: utter_double_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+    
+- story: info room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - intent: rooms
+    - action: utter_rooms
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: hỏi_website
+  steps:
+  - intent: faq_website_hotel
+  - action: utter_website_hotel
+
+

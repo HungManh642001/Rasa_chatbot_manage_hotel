@@ -1,0 +1,421 @@
+version: "3.0"
+
+intents:
+  - greet
+  - goodbye
+  - thankyou
+  - faq_check_in_time
+  - faq_check_out_time
+  - faq_breakfast
+  - faq_breakfast_time
+  - faq_restaurant
+  - faq_restaurant_time
+  - faq_cancel_reservation
+  - faq_cancel_policy
+  - faq_reception_time
+  - faq_pet_policy
+  - faq_pet_care_cost
+  - faq_nearest_airport
+  - faq_luggage
+  - faq_contact_number
+  - faq_parking
+  - faq_swimming_pool
+  - faq_address_hotel
+  - faq_wifi
+  - faq_baby_care
+  - faq_baby_policy
+  - faq_hotel_info
+  - faq_gym
+  - vip_room_details
+  - luxury_suite_room_details
+  - twin_room_details
+  - double_room_details
+  - rooms
+  - book_room
+  - faq_website_hotel
+
+# entities:
+#   - adults
+#   - child
+#   - name
+#   - email
+#   - number
+#   - room
+#   - room_type
+#   - date
+#   - period
+
+slots:
+  name:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: name
+  email:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: email
+  phone_number:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: phone_number
+  adults:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: adults
+  child:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: child
+  room_type:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: room_type
+  rooms:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: rooms
+  date:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: date
+  period:
+    type: text
+    influence_conversation: true
+    mappings: 
+    - type: from_text
+      conditions:
+        - active_loop: book_room_form
+          requested_slot: period
+
+forms:
+  book_room_form: 
+    required_slots: 
+      - name
+      - email
+      - phone_number
+      - adults
+      - child
+      - room_type
+      - rooms
+      - date
+      - period
+
+responses:
+  utter_submit: 
+    - text: "Qúy khách vừa đăng ký đặt phòng của khách sạn chúng tối với thông tin cụ thể sau:\n
+              - Họ và tên người đăng ký: {name}\n
+              - Địa chỉ email: {email}\n
+              - Số điện thoại: {name}\n
+              - Số người lớn: {adults}\n
+              - Số trẻ em (dưới 10 tuổi): {child}\n
+              - Loại phòng: {room_type}\n
+              - Số phòng: {rooms}\n
+              - Ngày nhập phòng: {date}\n
+              - Thời gian: {period}\nNhân viên lễ tân của khách sạn sẽ liên hệ lại cho khách hàng để trao đổi chi tiết đơn đặt phòng.\n Cảm ơn quý khách đã tin tưởng khách sạn Pahm chúng tôi!"
+  
+
+  utter_ask_adults: 
+    - text: "Có bao nhiều người lớn (trên 10 tuổi)?"
+      elements:
+      - title: ""
+        subtitle: ""
+        buttons:
+          - title: 1 - 2
+            payload: 1 - 2
+          - title: 3 - 4
+            payload: 3 - 4
+          - title: 5 người trở lên
+            payload: 5 người trở lên
+
+  utter_ask_child: 
+    - text: "Có bao nhiêu trẻ nhỏ dưới 10 tuổi"
+      elements:
+      - title: 
+        subtitle: 
+        buttons:
+          - title: 1 - 2
+            payload: 1 - 2
+          - title: 3 - 4
+            payload: 3 - 4
+          - title: 5 người trở lên
+            payload: 5 người trở lên
+  utter_ask_name: 
+    - text: "Họ và tên bạn?"
+
+  utter_ask_email: 
+    - text: "Địa chỉ email hay dùng của bạn?"
+
+  utter_ask_phone_number: 
+    - text: "Số điện thoại của bạn là gì?"
+
+  utter_ask_rooms: 
+    - text: "Số phòng bạn muốn đặt?"
+
+  utter_ask_room_type: 
+    - text: "Loại phòng bạn muốn đặt?"
+      quick_replies:
+       - title: Phòng vip
+         payload: Phòng vip
+       - title: Phòng luxury suite
+         payload: Phòng luxury suite
+       - title: Phòng twin
+         payload: Phòng twin
+       - title: Phòng double
+         payload: Phòng double
+
+  utter_ask_date: 
+    - text: "Bạn muốn đặt phòng từ ngày?"
+
+  utter_ask_period: 
+    - text: "Thời gian đặt phòng là bao nhiêu lâu?"
+
+          
+  utter_greet:
+    - text: "Kính chào quý khách.\nKhách sạn Pahm hân hạnh được phục vụ quý khách.
+    Chúng tôi có thể giúp gì được cho bạn!"
+
+  utter_goodbye:
+    - text: "Hẹn gặp lại quý khách"
+
+  utter_thankyou:
+    - text: "Phục vụ quý khách hài lòng là mục tiêu hướng đến của khách sạn chúng tôi!"
+
+  utter_check_in_time:
+    - text: "Thời gian nhận phòng từ 16h đến 22h. Tuổi nhận phòng tối thiếu là 20. Vui lòng liên hệ lễ tân cho các yêu cầu nhận phòng sớm."
+
+  utter_check_out_time:
+    - text: "Thời gian trả phòng là từ 12h sáng. Vui lòng liên hệ lễ tân để trả phòng trễ"
+
+  utter_breakfast:
+    - text: "Khách sạn chúng tôi có phục vụ bữa sáng buffet MIỄN PHÍ tại Nhà hàng Sunny ở tầng một"
+
+  utter_breakfast_time:
+    - text: "Bữa sáng từ thứ 2 đến thứ 6 bắt đầu từ 6h00-10h00. Vào thứ 7 và chủ nhật, chúng tôi bắt đầu từ 7h00-11h00."
+
+  utter_restaurant:
+    - text: "Khách sạn của chúng tôi có một nhà hàng Sunny. Thực đơn của chúng tôi rất đa dạng, bao gồm những đặc sản của khu vực và những đồ Tây."
+
+  utter_restaurant_time:
+    - text: "Nhà hàng của chúng tôi phục vụ từ 8h00-24h00"
+    - text: "Nhà hàng của chúng tôi mở cửa từ 8h00-24h00"
+
+  utter_cancel_reservation:
+    - text: "Để hủy đặt phòng, vui lòng liên hệ tới số điện thoại hotline: 0237.35.99999  – 0913 19 3368 của khách sạn để được hỗ trợ trực tiếp."
+
+  utter_cancel_policy:
+    - text: "Đặt cọc đặt phòng sẽ được hoàn lại nếu việc hủy bỏ xảy ra ít nhất 15 ngày trước khi đến. Đối với những trường hợp hủy bỏ sau thời gian này, sẽ bị phạt theo chính sách hủy bỏ khách sạn."
+  
+  utter_reception_time:
+    - text: "Lễ tân phục vụ 24/7, quý khách gặp vấn đề gì có thể gọi lễ tân để giải quyết."
+  
+  utter_pet_policy:
+    - text: "Khách sạn có chính sách không được mang vật nuôi vào, nhưng có dịch vụ cho thuê thú cưng."
+
+  utter_pet_care_cost:
+    - text: "Chi phí chăm sóc thú cưng là 300k/1con/1 ngày"
+
+  utter_nearest_airport: 
+    - text: "Khách sạn cách sân bay Sao Vàng khoảng 30 phút lái xe nhưng còn tùy thuộc vào thời gian di chuyển và mạt độ lưu thông tại thời điểm di chuyển."
+  
+  utter_luggage:
+    - text: "Khách sạn cung cấp dịch vụ trông giữ đồ ở quầy lễ tân"
+  
+  utter_contact_number:
+    - text: "Quý khách có thể liên hệ qua hotline của khách sạn là: 0237.35.99999  – 0913 19 3368"
+  
+  utter_parking:
+    - text: "Khách sạn có bãi đỗ xe ngoài trời miễn phí, cách khách sạn 100m"
+
+  utter_swimming_pool:
+    - text: "Mọi người đến đây đều rất thích bể bơi của khách sạn. Nó nằm ở đối diện tòa chính của khách sạn. Nó mở cửa từ 9h sáng đến 21h đêm. Ở đó có mọi khu vực phù hợp với mọi độ tuổi. Bể được thay nước liên tục nên quý khách yên lầm về chất lượng. Nhân viên bảo hộ luôn trực 24/24 để đề phòng khách hàng có xảy ra sự cố ngoài ý muốn."
+
+  utter_address_hotel:
+    - text: "Số 15 Phan Tru Trinh, phường Điện Biên, TP Thanh Hóa"
+    # - text: "https://www.google.com/maps/place/Kha%CC%81ch+sa%CC%A3n+Palm+Thanh+Ho%CC%81a/@19.811946,105.7708713,17z/data=!3m1!4b1!4m8!3m7!1s0x3136f7879a208aa5:0x14d0689c0f86b554!5m2!4m1!1i2!8m2!3d19.811941!4d105.7730653"
+
+  utter_wifi:
+    - text: "Khách sạn được trang bị Internet wifi MIỄN PHÍ trong phòng và ở các khu vực công cộng và việc kết nối sẽ rất thuận tiện. Mật khẩu wifi được cung cấp trên tường phòng của khách sạn"
+
+  utter_baby_care:
+    - text: "Hiện tại khách sạn chúng tôi chưa có dịch vụ trông trẻ."
+
+  utter_baby_policy:
+    - text: "Đối với trẻ em dưới 10 tuổi, khách sạn miễn phí tiền phòng."
+
+  utter_hotel_info:
+    - text: "Khách sạn Palm Thanh Hóa tọa lạc ở ngay trung tâm thành phố Thanh Hóa với vị trí giao thông đắc địa, cách quốc lộ 1A 500m, gần quảng trường, rạp hát Lam Sơn. Từ khách sạn, Quý khách chỉ mất vài phút đi bộ để đến nhà ga Thanh Hóa, các siêu thị, ngân hàng, trường học và nhiều cơ quan công vụ khác.\nĐặc biệt, chỉ 15 phút lái xe Quý khách đã có mặt tại biển Sầm Sơn thơ mộng và nếu sử dụng dịch vụ vận chuyển bằng đường hàng không, chỉ 30 phút lái xe, Quý khách sẽ đến với Cảng hàng không Thọ Xuân."
+      image: "https://lh5.googleusercontent.com/p/AF1QipNekKiINTgpifgH_CMxITe_O2OcDDClnQJJtgBQ=w408-h306-k-no"
+
+  utter_gym:
+    - text: "Phòng tập thể dục nằm tại khu vực lầu 11 của khách sạn. Mở cửa từ 6:00 giờ – 21:00 giờ mỗi ngày dành cho khách lưu trú tại khách sạn. sử dụng miễn phí."
+
+  utter_book_room:
+    - text: "Có 2 cách đơn giản để Quý Khách có thể đặt phòng tại Khách sạn:\nCách 1: Quý khách gọi đến số điện thoại Khách sạn hoặc số Hotline để đặt phòng và được tư vấn trực tiếp: 0237.35.99999  – 0913 19 3368\nCách 2: Quý khách truy cập mạng bán phòng online tại www.palmhotel.vn  và làm theo các bước hướng dẫn đặt phòng tại đây. Sau khi hoàn tất các bước đặt phòng, Khách sạn sẽ chủ động liên hệ với quý khách để hồi đáp những yêu cầu của Quý Khách.\n   Ngoài ra, trong trường hợp quý khách ở nước ngoài, hoặc không thể liên hệ qua điện thoại hay đặt phòng khách sạn thông qua website: www.palmhotel.vn  quý khách có thể gởi email với yêu cầu đặt phòng chi tiết về địa chỉ : info@palmhotel.vn"
+
+  utter_rooms:
+   - text: "Khách sạn Pahm cung cấp 4 loại phòng: phòng vip, phòng luxury suite, phong twin, phòng double.\nBạn có thể chọn từng phòng để xem thông tin cụ thể hơn nhé!"
+     quick_replies:
+       - title: Phòng vip
+         payload: /vip_room_details
+       - title: Phòng luxury suite
+         payload: /luxury_suite_room_details
+       - title: Phòng twin
+         payload: /twin_room_details
+       - title: Phòng double
+         payload: /double_room_details
+
+  utter_vip_room_details:
+   - text: "Phòng VIP có diện tích 50 mét vuông với kiến trúc châu Âu độc đáo, nội thất ngoại nhập sang trọng chắc chắn sẽ mang đến cho Quý khách cảm giác thư giãn, thoải mái, ấm áp khi nghỉ tại đây. Phòng vip bao gồm bao gồm 1 phòng ngủ và 1 phòng khách riêng biệt cùng ban công có tầm nhìn hướng ra trung tâm thành phố. Từ ban công quý khách có thể vừa thưởng thức trà vừa ngắm quang cảnh thành phố Thanh Hóa xinh đẹp.\nNhấn vào link để xem chi tiết về phòng: https://palmhotel.vn/phong-vip"
+     elements:
+       - title: Phòng vip
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Vip-Room-PalmHotel-Thanh-Hoa-1.jpg
+       - title: Phòng vip
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Vip-Room-PalmHotel-Thanh-Hoa-2.jpg
+       - title: Phòng vip
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Vip-Room-PalmHotel-Thanh-Hoa-3.jpg
+       - title: Phòng vip
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Vip-Room-PalmHotel-Thanh-Hoa-4.jpg
+       - title: Phòng vip
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Vip-Room-PalmHotel-Thanh-Hoa-5.jpg
+       - title: Phòng vip
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Vip-Room-PalmHotel-Thanh-Hoa-6.jpg
+      
+
+  utter_luxury_suite_room_details:
+   - text: "Phòng Luxury Suite có diện tích 55m2 với kiến trúc châu Âu độc đáo, nội thất ngoại nhập sang trọng chắc chắn sẽ mang đến cho Quý khách cảm giác thư giãn, thoải mái, ấm áp khi nghỉ tại đây. Luxury Suite bao gồm bao gồm 01 phòng ngủ và 01 phòng khách riêng biệt cùng ban công có tầm nhìn hướng ra trung tâm thành phố. Từ ban công quý khách có thể vừa thưởng thức trà vừa ngắm quang cảnh thành phố Thanh Hóa xinh đẹp.\nNhấn vào link để xem chi tiết về phòng: https://palmhotel.vn/phong-luxury-suite"
+     elements:
+       - title: Phòng luxury suite
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/palm-hotel-thanh-hoa-phong-luxury-suite-7.jpg
+       - title: Phòng luxury suite
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/palm-hotel-thanh-hoa-phong-luxury-suite-8.jpg
+       - title: Phòng luxury suite
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/palm-hotel-thanh-hoa-phong-luxury-suite-9.jpg
+       - title: Phòng luxury suite
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/palm-hotel-thanh-hoa-phong-luxury-suite-10.jpg
+       - title: Phòng luxury suite
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/palm-hotel-thanh-hoa-phong-luxury-suite-11.jpg
+       - title: Phòng luxury suite
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/palm-hotel-thanh-hoa-phong-luxury-suite-12.jpg
+
+
+  utter_twin_room_details:
+   - text: "Phòng Twin Room với thiết kế hài hòa, nội thất sang trọng với đầy đủ tiện nghi hiện đại. Diện tích 38m2 mỗi phòng đều có tiểu cảnh giếng trời cấp gió tươi và tạo cảm giác gần gũi với thiên nhiên nhờ trang trí sinh động, đẹp mắt với cây phong, hoa lá, chim công, quý khách sẽ có cảm giác như mình đang ở gần một rừng phong thu nhỏ với sắc vàng đỏ tươi tắn. Bàn làm việc cạnh cửa sổ giếng trời mang lại cho quý khách cảm giác yên tĩnh, thư giãn tạo hiệu quả cao khi phải làm việc với máy tính.\nNhấn vào link để xem chi tiết về phòng: https://palmhotel.vn/phong-twin"
+     elements:
+       - title: Phòng twin
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Twin-Room-PalmHotel-Thanh-Hoa-1.jpg
+       - title: Phòng twin
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Twin-Room-PalmHotel-Thanh-Hoa-2.jpg
+       - title: Phòng twin
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Twin-Room-PalmHotel-Thanh-Hoa-3.jpg
+       - title: Phòng twin
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Twin-Room-PalmHotel-Thanh-Hoa-4.jpg
+       - title: Phòng twin
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Twin-Room-PalmHotel-Thanh-Hoa-5.jpg
+       - title: Phòng twin
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Twin-Room-PalmHotel-Thanh-Hoa-6.jpg
+
+
+  utter_double_room_details:
+   - text: "Phòng Double Room với thiết kế hài hòa, nội thất sang trọng với đầy đủ tiện nghi hiện đại. Diện tích 35m2 mỗi phòng đều có cửa sổ hướng Nam mang lại gió tươi, không gian thoáng mát, thoải mái nhất cho quý khách. Đặc biệt bàn trà ngay cạnh cửa sổ sẽ mang lại cho quý khách cảm giác thư thái, yên tĩnh khi thưởng thức trà.\nPhòng có nội thất sang trọng, đồng bộ, sàn gỗ cao cấp, không gian rộng rãi, quý khách có thể dễ dàng ngắm cảnh thành phố về phía Nam.\nNhấn vào link để xem chi tiết về phòng: https://palmhotel.vn/phong-double"
+     elements:
+       - title: Phòng double
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Double-Room-PalmHotel-Thanh-Hoa-1.jpg
+       - title: Phòng double
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Double-Room-PalmHotel-Thanh-Hoa-2.jpg
+       - title: Phòng doulbe
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Double-Room-PalmHotel-Thanh-Hoa-3.jpg
+       - title: Phòng double
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Double-Room-PalmHotel-Thanh-Hoa-4.jpg
+       - title: Phòng double
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Double-Room-PalmHotel-Thanh-Hoa-5.jpg
+       - title: Phòng double
+         image_url: https://palmhotel.vn/wp-content/uploads/2019/05/Double-Room-PalmHotel-Thanh-Hoa-6.jpg
+  
+  utter_website_hotel:
+  - text: "Website của khách sạn: https://palmhotel.vn"
+
+  utter_fallback:
+  - text: "Xin lỗi tôi không hiểu. Tôi có thể hỗ trợ bạn các chức năng như thông tin khách sạn, các loại phòng, thông tin các dịch vụ ẩm thực trong khách sạn, thông tin các dịch vụ cung cấp khác như internet, bể bơi, ..."
+  
+
+actions: 
+  # - validate_book_room_form
+  - utter_greet
+  - utter_goodbye
+  - utter_thankyou
+  - utter_check_in_time
+  - utter_check_out_time
+  - utter_breakfast
+  - utter_breakfast_time
+  - utter_restaurant
+  - utter_restaurant_time
+  - utter_cancel_reservation
+  - utter_cancel_policy
+  - utter_reception_time
+  - utter_pet_policy
+  - utter_pet_care_cost
+  - utter_nearest_airport
+  - utter_luggage
+  - utter_contact_number
+  - utter_parking
+  - utter_swimming_pool
+  - utter_address_hotel
+  - utter_wifi
+  - utter_baby_care
+  - utter_baby_policy
+  - utter_hotel_info
+  - utter_gym
+  - utter_rooms
+  - utter_book_room
+  - utter_vip_room_details
+  - utter_luxury_suite_room_details
+  - utter_twin_room_details
+  - utter_double_room_details
+  - utter_submit
+  - utter_ask_adults
+  - utter_ask_child
+  - utter_ask_name
+  - utter_ask_email
+  - utter_ask_phone_number
+  - utter_ask_rooms
+  - utter_ask_room_type
+  - utter_ask_date
+  - utter_ask_period
+  - utter_website_hotel
+  - utter_fallback
+  
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
