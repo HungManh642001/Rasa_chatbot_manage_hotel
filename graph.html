@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Rasa Core Visualisation</title>
+    <script src="https://dagrejs.github.io/project/dagre-d3/latest/dagre-d3.min.js"></script>
+    <script src="https://dagrejs.github.io/project/dagre/latest/dagre.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://dagrejs.github.io/project/graphlib-dot/v0.6.3/graphlib-dot.js"></script>
+</head>
+<body>
+<div id="errormsg" style="color: #b00"></div>
+<svg>
+    <style id="graph-style">
+        .node.invisible > rect {
+            display: none;
+        }
+
+        .node.start > rect {
+            fill: #7f7;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node.end > rect {
+            fill: #f77;
+            rx: 30;
+            ry: 18;
+        }
+
+        .node:not(.active) > rect, .node:not(.active) > .label {
+            opacity: 0.4;
+        }
+
+        .edgePath:not(.active) path {
+            opacity: 0.4;
+        }
+
+        .node.ellipsis > rect {
+            fill: #CCC;
+        }
+
+        .node.intent > rect {
+            fill: #7ff;
+        }
+
+        .node.dashed > rect {
+            stroke-dasharray: 5;
+        }
+
+        text {
+            font-weight: 300;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serf, serif;
+            font-size: 14px;
+            color: #1f1d1d;
+        }
+
+        .node rect {
+            stroke: #444;
+            fill: #fff;
+            stroke-width: 1.5px;
+        }
+
+        .edgePath path {
+            stroke: #333;
+            stroke-width: 1.5px;
+        }
+
+        svg {
+            position: fixed;
+            top: 10px;
+            left: 0;
+            height: 100%;
+            width: 100%
+        }
+    </style>
+    <g></g>
+</svg>
+<script>
+
+  function serveGraph() {
+    let oldInputGraphValue;
+
+    const url = 'visualization.dot';
+    const refreshInterval = 500;
+
+    // trigger a refresh by fetching an updated graph
+    setInterval(function () {
+      fetch(url).then(r => r.text()).then(dot => {
+        document.getElementById('errormsg').innerHTML = '';
+        if (oldInputGraphValue === dot) return;
+
+        oldInputGraphValue = dot;
+        drawGraph(dot);
+      }).catch(err => {
+        document.getElementById('errormsg').innerHTML =
+          'Failed to update plot. (' + err.message + ')';
+      });
+    }, refreshInterval);
+  }
+
+  function drawGraph(graph) {
+    let g = graphlibDot.read(graph);
+    // Set margins, if not present
+    if (!g.graph().hasOwnProperty("marginx") &&
+      !g.graph().hasOwnProperty("marginy")) {
+      g.graph().marginx = 20;
+      g.graph().marginy = 20;
+    }
+    g.graph().transition = function (selection) {
+      return selection.transition().duration(300);
+    };
+    // Render the graph into svg g
+    d3.select("svg g").call(render, g);
+  }
+  // Set up zoom support
+  const svg = d3.select("svg"),
+    inner = d3.select("svg g"),
+    zoom = d3.zoom().on("zoom", function () {
+      inner.attr("transform", d3.event.transform);
+    });
+  svg.call(zoom);
+
+  // Create and configure the renderer
+  const render = dagreD3.render();
+
+  let isClient = false;
+  isClient = true;
+
+  if (isClient) {
+    // Mark all nodes and their edges as active
+    cssRules = document.getElementById('graph-style').sheet.cssRules;
+    cssRules[3].style.opacity = 1;
+    cssRules[4].style.opacity = 1;
+
+    let graph;
+    graph = `digraph  {
+0 [class="start active", fillcolor=green, fontsize=12, label=START, style=filled];
+"-1" [class=end, fillcolor=red, fontsize=12, label=END, style=filled];
+1 [class="", fontsize=12, label=utter_greet];
+2 [class="", fontsize=12, label=utter_cancel_policy];
+3 [class="", fontsize=12, label=utter_thankyou];
+5 [class="", fontsize=12, label=utter_restaurant];
+8 [class="", fontsize=12, label=utter_restaurant_time];
+11 [class="", fontsize=12, label=utter_breakfast];
+14 [class="", fontsize=12, label=utter_breakfast_time];
+17 [class="", fontsize=12, label=utter_reception_time];
+18 [class="", fontsize=12, label=utter_contact_number];
+21 [class="", fontsize=12, label=utter_pet_policy];
+22 [class="", fontsize=12, label=utter_pet_care_cost];
+25 [class="", fontsize=12, label=utter_nearest_airport];
+27 [class="", fontsize=12, label=utter_contact_number];
+29 [class="", fontsize=12, label=utter_luggage];
+32 [class="", fontsize=12, label=utter_parking];
+35 [class="", fontsize=12, label=utter_swimming_pool];
+38 [class="", fontsize=12, label=utter_address_hotel];
+41 [class="", fontsize=12, label=utter_wifi];
+44 [class="", fontsize=12, label=utter_baby_care];
+47 [class="", fontsize=12, label=utter_baby_policy];
+50 [class="", fontsize=12, label=utter_gym];
+53 [class="", fontsize=12, label=utter_hotel_info];
+56 [class="", fontsize=12, label=utter_vip_room_details];
+59 [class="", fontsize=12, label=utter_luxury_suite_room_details];
+62 [class="", fontsize=12, label=utter_twin_room_details];
+65 [class="", fontsize=12, label=utter_double_room_details];
+68 [class="", fontsize=12, label=utter_rooms];
+70 [class="", fontsize=12, label=utter_website_hotel];
+72 [class="", fontsize=12, label=book_room_form];
+73 [class="", fontsize=12, label=utter_submit];
+75 [class="", fontsize=12, label=utter_goodbye];
+77 [class="", fontsize=12, label=utter_check_in_time];
+80 [class="", fontsize=12, label=utter_check_out_time];
+83 [class="", fontsize=12, label=utter_cancel_reservation];
+85 [class="", fontsize=12, label="..."];
+88 [class="", fontsize=12, label=book_room_form];
+92 [class=intent, fillcolor=lightblue, label="chào bạn", shape=rect, style=filled];
+93 [class=intent, fillcolor=lightblue, label="Số điện thoại để đặt phòng", shape=rect, style=filled];
+94 [class=intent, fillcolor=lightblue, label="Các phương tiện liên lạc với khách sạn qua mạng là gì?", shape=rect, style=filled];
+95 [class=intent, fillcolor=lightblue, label="see you later", shape=rect, style=filled];
+96 [class=intent, fillcolor=lightblue, label="Bạn có bất kỳ chính sách hủy bỏ nào không", shape=rect, style=filled];
+97 [class=intent, fillcolor=lightblue, label="cho tôi hỏi khách sạn có nhà hàng nào không", shape=rect, style=filled];
+98 [class=intent, fillcolor=lightblue, label="cho tôi biết thời gian của nhà hàng", shape=rect, style=filled];
+99 [class=intent, fillcolor=lightblue, label="Bữa sáng có bao", shape=rect, style=filled];
+100 [class=intent, fillcolor=lightblue, label="Bữa sáng kết thúc từ mấy giờ", shape=rect, style=filled];
+101 [class=intent, fillcolor=lightblue, label="Lễ tân làm việc đến khi nào", shape=rect, style=filled];
+102 [class=intent, fillcolor=lightblue, label="Vật nuôi có được phép vào khách sạn không", shape=rect, style=filled];
+103 [class=intent, fillcolor=lightblue, label="Khách sạn có gần sân bay không", shape=rect, style=filled];
+104 [class=intent, fillcolor=lightblue, label="Khách sạn có trông giữ đồ không", shape=rect, style=filled];
+105 [class=intent, fillcolor=lightblue, label="Bãi đậu xe của khách sạn ở đâu", shape=rect, style=filled];
+106 [class=intent, fillcolor=lightblue, label="Khách sạn có hồ bơi không", shape=rect, style=filled];
+107 [class=intent, fillcolor=lightblue, label="Hãy gửi tôi thông tin về địa chỉ khách sạn của bạn?", shape=rect, style=filled];
+108 [class=intent, fillcolor=lightblue, label="Khách sạn có mạng không", shape=rect, style=filled];
+109 [class=intent, fillcolor=lightblue, label="Tôi muốn hỏi dịch vụ trông trẻ của khách sạn", shape=rect, style=filled];
+110 [class=intent, fillcolor=lightblue, label="Chính sách của khách sạn cho trẻ em", shape=rect, style=filled];
+111 [class=intent, fillcolor=lightblue, label="Dịch vụ phòng gym có được chọn gói khi thuê phòng không ?", shape=rect, style=filled];
+112 [class=intent, fillcolor=lightblue, label="Thông tin cơ bản về khách sạn", shape=rect, style=filled];
+113 [class=intent, fillcolor=lightblue, label="vip room", shape=rect, style=filled];
+114 [class=intent, fillcolor=lightblue, label=suite, shape=rect, style=filled];
+115 [class=intent, fillcolor=lightblue, label="Phòng 2 giường đơn", shape=rect, style=filled];
+116 [class=intent, fillcolor=lightblue, label="Tôi muốn hỏi về phòng double của khách sạn", shape=rect, style=filled];
+117 [class=intent, fillcolor=lightblue, label="Khách sạn có những loại phòng nào", shape=rect, style=filled];
+118 [class=intent, fillcolor=lightblue, label="Cho chị đặt phòng", shape=rect, style=filled];
+119 [class=intent, fillcolor=lightblue, label="Bạn có thể cho tôi biết khi nào nhận phòng không?", shape=rect, style=filled];
+120 [class=intent, fillcolor=lightblue, label="Trả phòng", shape=rect, style=filled];
+121 [class=intent, fillcolor=lightblue, label="Làm thế nào để hủy phòng tôi đã đặt", shape=rect, style=filled];
+122 [class=intent, fillcolor=lightblue, label="cảm ơn ad", shape=rect, style=filled];
+123 [class=intent, fillcolor=lightblue, label="cảm ơn nha", shape=rect, style=filled];
+124 [class=intent, fillcolor=lightblue, label="cảm ơn ad", shape=rect, style=filled];
+125 [class=intent, fillcolor=lightblue, label="thanks bot", shape=rect, style=filled];
+126 [class=intent, fillcolor=lightblue, label="thank you", shape=rect, style=filled];
+127 [class=intent, fillcolor=lightblue, label="Số điện thoại của khách sạn là gì", shape=rect, style=filled];
+128 [class=intent, fillcolor=lightblue, label=ok, shape=rect, style=filled];
+129 [class=intent, fillcolor=lightblue, label="chi phí trông coi thú cưng là bao nhiêu", shape=rect, style=filled];
+130 [class=intent, fillcolor=lightblue, label="great! Thanks", shape=rect, style=filled];
+131 [class=intent, fillcolor=lightblue, label="cảm ơn nha", shape=rect, style=filled];
+132 [class=intent, fillcolor=lightblue, label="thank you", shape=rect, style=filled];
+133 [class=intent, fillcolor=lightblue, label="good job", shape=rect, style=filled];
+134 [class=intent, fillcolor=lightblue, label="thank you so much", shape=rect, style=filled];
+135 [class=intent, fillcolor=lightblue, label="thanks em nha", shape=rect, style=filled];
+136 [class=intent, fillcolor=lightblue, label=ok, shape=rect, style=filled];
+137 [class=intent, fillcolor=lightblue, label="thank you so much", shape=rect, style=filled];
+138 [class=intent, fillcolor=lightblue, label="cảm ơn nha", shape=rect, style=filled];
+139 [class=intent, fillcolor=lightblue, label="cảm ơn", shape=rect, style=filled];
+140 [class=intent, fillcolor=lightblue, label="great! Thanks", shape=rect, style=filled];
+141 [class=intent, fillcolor=lightblue, label="cảm ơn", shape=rect, style=filled];
+142 [class=intent, fillcolor=lightblue, label=okay, shape=rect, style=filled];
+143 [class=intent, fillcolor=lightblue, label="cảm ơn ad", shape=rect, style=filled];
+144 [class=intent, fillcolor=lightblue, label="cảm ơn bot nha", shape=rect, style=filled];
+145 [class=intent, fillcolor=lightblue, label="thank you", shape=rect, style=filled];
+146 [class=intent, fillcolor=lightblue, label=ok, shape=rect, style=filled];
+147 [class=intent, fillcolor=lightblue, label="cảm ơn", shape=rect, style=filled];
+148 [class=intent, fillcolor=lightblue, label="thanks bot", shape=rect, style=filled];
+149 [class=intent, fillcolor=lightblue, label="see you later", shape=rect, style=filled];
+150 [class=intent, fillcolor=lightblue, label="Cho chị đặt phòng", shape=rect, style=filled];
+0 -> 85  [class="", key=NONE, label=""];
+0 -> 92  [class="", key=0];
+0 -> 93  [class="", key=0];
+0 -> 94  [class="", key=0];
+0 -> 95  [class="", key=0];
+1 -> "-1"  [class="", key=NONE, label=""];
+1 -> 96  [class="", key=0];
+1 -> 97  [class="", key=0];
+1 -> 98  [class="", key=0];
+1 -> 99  [class="", key=0];
+1 -> 100  [class="", key=0];
+1 -> 101  [class="", key=0];
+1 -> 102  [class="", key=0];
+1 -> 103  [class="", key=0];
+1 -> 104  [class="", key=0];
+1 -> 105  [class="", key=0];
+1 -> 106  [class="", key=0];
+1 -> 107  [class="", key=0];
+1 -> 108  [class="", key=0];
+1 -> 109  [class="", key=0];
+1 -> 110  [class="", key=0];
+1 -> 111  [class="", key=0];
+1 -> 112  [class="", key=0];
+1 -> 113  [class="", key=0];
+1 -> 114  [class="", key=0];
+1 -> 115  [class="", key=0];
+1 -> 116  [class="", key=0];
+1 -> 117  [class="", key=0];
+1 -> 118  [class="", key=0];
+1 -> 119  [class="", key=0];
+1 -> 120  [class="", key=0];
+1 -> 121  [class="", key=0];
+2 -> 122  [class="", key=0];
+3 -> "-1"  [class="", key=NONE, label=""];
+5 -> 123  [class="", key=0];
+8 -> 124  [class="", key=0];
+11 -> 125  [class="", key=0];
+14 -> 126  [class="", key=0];
+17 -> 127  [class="", key=0];
+18 -> 128  [class="", key=0];
+21 -> 129  [class="", key=0];
+22 -> 130  [class="", key=0];
+25 -> 131  [class="", key=0];
+27 -> "-1"  [class="", key=NONE, label=""];
+29 -> 132  [class="", key=0];
+32 -> 133  [class="", key=0];
+35 -> 134  [class="", key=0];
+38 -> 135  [class="", key=0];
+41 -> 136  [class="", key=0];
+44 -> 137  [class="", key=0];
+47 -> 138  [class="", key=0];
+50 -> 139  [class="", key=0];
+53 -> 140  [class="", key=0];
+56 -> 141  [class="", key=0];
+59 -> 142  [class="", key=0];
+62 -> 143  [class="", key=0];
+65 -> 144  [class="", key=0];
+68 -> 145  [class="", key=0];
+70 -> "-1"  [class="", key=NONE, label=""];
+72 -> 73  [class="", key=NONE, label=""];
+73 -> "-1"  [class="", key=NONE, label=""];
+75 -> "-1"  [class="", key=NONE, label=""];
+77 -> 146  [class="", key=0];
+80 -> 147  [class="", key=0];
+83 -> 148  [class="", key=0];
+85 -> 72  [class="", key=NONE, label=""];
+85 -> 149  [class="", key=0];
+85 -> 150  [class="", key=0];
+88 -> "-1"  [class="", key=NONE, label=""];
+92 -> 1  [class="", key=0];
+93 -> 27  [class="", key=0];
+94 -> 70  [class="", key=0];
+95 -> 75  [class="", key=0];
+96 -> 2  [class="", key=0];
+97 -> 5  [class="", key=0];
+98 -> 8  [class="", key=0];
+99 -> 11  [class="", key=0];
+100 -> 14  [class="", key=0];
+101 -> 17  [class="", key=0];
+102 -> 21  [class="", key=0];
+103 -> 25  [class="", key=0];
+104 -> 29  [class="", key=0];
+105 -> 32  [class="", key=0];
+106 -> 35  [class="", key=0];
+107 -> 38  [class="", key=0];
+108 -> 41  [class="", key=0];
+109 -> 44  [class="", key=0];
+110 -> 47  [class="", key=0];
+111 -> 50  [class="", key=0];
+112 -> 53  [class="", key=0];
+113 -> 56  [class="", key=0];
+114 -> 59  [class="", key=0];
+115 -> 62  [class="", key=0];
+116 -> 65  [class="", key=0];
+117 -> 68  [class="", key=0];
+118 -> 72  [class="", key=0];
+119 -> 77  [class="", key=0];
+120 -> 80  [class="", key=0];
+121 -> 83  [class="", key=0];
+122 -> 3  [class="", key=0];
+123 -> 3  [class="", key=0];
+124 -> 3  [class="", key=0];
+125 -> 3  [class="", key=0];
+126 -> 3  [class="", key=0];
+127 -> 18  [class="", key=0];
+128 -> 3  [class="", key=0];
+129 -> 22  [class="", key=0];
+130 -> 3  [class="", key=0];
+131 -> 3  [class="", key=0];
+132 -> 3  [class="", key=0];
+133 -> 3  [class="", key=0];
+134 -> 3  [class="", key=0];
+135 -> 3  [class="", key=0];
+136 -> 3  [class="", key=0];
+137 -> 3  [class="", key=0];
+138 -> 3  [class="", key=0];
+139 -> 3  [class="", key=0];
+140 -> 3  [class="", key=0];
+141 -> 3  [class="", key=0];
+142 -> 3  [class="", key=0];
+143 -> 3  [class="", key=0];
+144 -> 3  [class="", key=0];
+145 -> 3  [class="", key=0];
+146 -> 3  [class="", key=0];
+147 -> 3  [class="", key=0];
+148 -> 3  [class="", key=0];
+149 -> 75  [class="", key=0];
+150 -> 88  [class="", key=0];
+}
+`;
+    drawGraph(graph);
+  } else {
+    serveGraph();
+  }
+
+
+</script>
+</body>
+</html>

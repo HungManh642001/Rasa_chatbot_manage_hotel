@@ -1,0 +1,98 @@
+[
+  {
+    "text": "Bữa sáng được phục vụ đến mấy giờ",
+    "intent": "faq_breakfast_time",
+    "intent_prediction": {
+      "name": "faq_breakfast",
+      "confidence": 0.7251574993133545
+    }
+  },
+  {
+    "text": "Các phương tiện liên lạc với khách sạn qua mạng là gì?",
+    "intent": "faq_website_hotel",
+    "intent_prediction": {
+      "name": "faq_contact_number",
+      "confidence": 0.959642231464386
+    }
+  },
+  {
+    "text": "see you later",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "thankyou",
+      "confidence": 0.7662914395332336
+    }
+  },
+  {
+    "text": "Thời gian check out",
+    "intent": "faq_check_out_time",
+    "intent_prediction": {
+      "name": "faq_check_in_time",
+      "confidence": 0.9788457155227661
+    }
+  },
+  {
+    "text": "Check out",
+    "intent": "faq_check_out_time",
+    "intent_prediction": {
+      "name": "faq_check_in_time",
+      "confidence": 0.975438117980957
+    }
+  },
+  {
+    "text": "thôi nha",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "thankyou",
+      "confidence": 0.29762551188468933
+    }
+  },
+  {
+    "text": "goodbye",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "thankyou",
+      "confidence": 0.8354603052139282
+    }
+  },
+  {
+    "text": "hẹn lần khác",
+    "intent": "goodbye",
+    "intent_prediction": {
+      "name": "faq_hotel_info",
+      "confidence": 0.18335993587970734
+    }
+  },
+  {
+    "text": "Khách sạn có phục vụ bữa sáng không?",
+    "intent": "faq_breakfast",
+    "intent_prediction": {
+      "name": "faq_breakfast_time",
+      "confidence": 0.521255373954773
+    }
+  },
+  {
+    "text": "good job",
+    "intent": "thankyou",
+    "intent_prediction": {
+      "name": "goodbye",
+      "confidence": 0.9349085092544556
+    }
+  },
+  {
+    "text": "Giá mỗi giờ tập gym là bao nhiêu?",
+    "intent": "faq_gym",
+    "intent_prediction": {
+      "name": "faq_pet_care_cost",
+      "confidence": 0.6471822261810303
+    }
+  },
+  {
+    "text": "Khách sạn có đường dẫn thông tin trên mạng không?",
+    "intent": "faq_website_hotel",
+    "intent_prediction": {
+      "name": "faq_wifi",
+      "confidence": 0.5225297212600708
+    }
+  }
+]

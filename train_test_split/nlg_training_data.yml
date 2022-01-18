@@ -1,0 +1,336 @@
+version: "3.0"
+
+nlu:
+- intent: greet
+  examples: |
+    - hi
+    - bot ơi, cho mình hỏi
+    - cho mình hỏi chút
+    - admin ơi cho mình hỏi chút
+    - ad ơi cho mình hỏi chút
+    - anh ơi
+    - em ơi
+    - chào ad
+    - chào bạn
+    - hi bot
+    - hey
+    - xin chào
+    - cho tôi hỏi một chút
+    - hello
+    - chào em  
+    - em ơi, cho anh hỏi chút
+
+- intent: goodbye
+  examples: |
+    - tạm biệt bot
+    - tạm biệt
+    - see you later
+    - bye
+    - goodbye
+    - tạm biệt bot nhá
+    - tạm biệt bạn nha
+    - gặp sau nha
+    - hẹn lần khác
+    - lúc khác nói tiếp sau
+    - thôi nha
+    - gặp sau
+    - tạm biệt admin
+
+- intent: thankyou
+  examples: |
+    - cảm ơn em nhá
+    - thanks em nha
+    - cảm ơn nha
+    - good job
+    - thank you
+    - cảm ơn bot nha
+    - thanks bot
+    - cảm ơn
+    - thank you so much
+    - great! Thanks
+    - cảm ơn ad
+    - ok
+    - okay
+
+
+- intent: faq_check_in_time
+  examples: |
+    - Thời gian check in
+    - Thời gian nhận phòng như thế nào?
+    - Bắt đầu nhận phòng từ mấy giờ được vậy bạn?
+    - Có thể nhận phòng từ mấy giờ?
+    - Thời gian nhận phòng từ lúc nào
+    - Bạn có thể cho tôi biết thời gian nhận phòng không
+    - Thời gian nhận phòng của khách sạn
+    - Khi nào tôi có thể nhận phòng
+    - Bạn có thể cho tôi biết khi nào nhận phòng không?
+    - Khi nào nhận phòng?
+    - Nhận phòng
+    - Check in
+
+- intent: faq_check_out_time
+  examples: |
+    - Thời gian check out
+    - Thời gian trả phòng như thế nào?
+    - Bắt đầu trả phòng từ mấy giờ được vậy bạn
+    - Có thể trả phòng từ mấy giờ
+    - Thời gian trả phòng từ mấy giờ
+    - Bạn có thể cho tôi biết thời gian trả phòng không
+    - Cho tôi biết thời gian trả phòng
+    - Khi nào tôi phải trả phòng
+    - Khi nào trả phòng 
+    - Thời gian trả phòng
+    - Trả phòng
+    - Check out
+
+- intent: faq_breakfast
+  examples: |
+    - Khách sạn có phục vụ bữa sáng không?
+    - Bữa sáng có được miễn phí không
+    - Có bữa sáng miễn phí không
+    - Có bao gồm bữa sáng không
+    - Dịch vụ đã bao gồm bữa sáng chưa
+    - Bữa sáng
+    - Bữa sáng có bao 
+
+- intent: faq_breakfast_time
+  examples: |
+    - Bữa sáng bắt đầu từ khi nào
+    - Cho tôi biết thời gian của bữa sáng
+    - Thời gian của bữa sáng là khi nào
+    - Tôi có thể ăn sáng từ mấy giờ
+    - Bữa sáng bắt đầu từ mấy giờ
+    - Bữa sáng kết thúc từ mấy giờ
+    - Bữa sáng được phục vụ đến mấy giờ
+
+- intent: faq_restaurant
+  examples: |
+    - Khách sạn có nhà hàng không
+    - khách sạn dịch vụ nhà hàng không
+    - cho tôi hỏi khách sạn có nhà hàng nào không
+
+- intent: faq_restaurant_time
+  examples: |
+    - Thời gian của nhà hàng là gì
+    - cho tôi biết thời gian của nhà hàng
+    - Nhà hàng khi nào đóng cửa
+    - Mấy giờ nhà hàng đóng cửa
+    - Mấy giờ nhà hàng mở cửa
+    - Nhà hàng mở cửa lúc nào
+
+- intent: faq_cancel_reservation
+  examples: |
+    - Tôi muốn hủy đặt phòng mà tôi đã thực hiện
+    - Hủy đặt phòng của tôi mà tôi đã thực hiện trước đó
+    - Tôi muốn hủy phòng mình đã đặt
+    - Làm thế nào để hủy phòng tôi đã đặt
+    - Tôi có thể hủy đặt phòng của mình không
+    - Hủy đặt phòng của tôi
+
+- intent: faq_cancel_policy
+  examples: |
+    - Chính sách hủy phòng là gì
+    - Bạn có thể cho tôi biết chính sách hủy phòng
+    - Tôi muốn biết chính sách hủy phòng của khách sạn
+    - Bạn có bất kỳ chính sách hủy bỏ nào không
+    - Tôi muốn xem chính sách hủy của bạn
+    - Chính sách hủy phòng ở đâu
+
+- intent: faq_reception_time
+  examples: |
+    - Lễ tân làm việc từ mấy giờ
+    - Lễ tân làm việc đến khi nào
+    - Lễ tân làm việc đến mấy giờ
+    - Thời gian làm việc của lễ tân
+    - Khung giờ làm việc của lễ tân
+
+- intent: faq_pet_policy
+  examples: |
+    - Khách sạn có được mang vật nuôi vào không
+    - Khách sạn có cho phép mang vật nuôi không
+    - Vật nuôi có được phép vào khách sạn không
+    - Tôi có thể mang theo vật nuôi vào khách sạn không
+
+- intent: faq_pet_care_cost
+  examples: |
+    - giá của dịch vụ chăm sóc thú cưng là bao nhiêu
+    - chăm sóc thú cưng hết bao nhiều tiền
+    - Dịch vụ chăm sóc thu cưng có giá bao nhiêu
+    - chi phí chăm sóc thú nuôi là bao nhiêu
+    - chi phí trông coi thú cưng là bao nhiêu
+
+- intent: faq_nearest_airport
+  examples: |
+    - Khách sạn có gần sân bay không
+    - sân bay có gần đó không
+    - Khách sạn cách sân bay gần nhất bao xa
+    - Thời gian di chuyển đến sân bay gần nhất
+
+- intent: faq_luggage
+  examples: |
+    - Khách sạn có dịch vụ trông giữ đồ không
+    - Khách sạn có cho gửi đồ không
+    - Khách sạn có trông giữ đồ không
+    - Có dịch vụ trông giữ đồ không
+
+- intent: faq_contact_number
+  examples: |
+    - Số điện thoại của khách sạn là gì
+    - Số điện thoại hotline của khách sạn là gì
+    - Khi tôi gặp vấn đề gấp cần phải liên lạc tới số điện thoại nào
+    - Đường dây nóng của khách sạn là gì
+    - Đường dây nóng là gì
+    - Số điện thoại hotline là gì
+    - Số điện thoại để đặt phòng 
+
+- intent: faq_parking
+  examples: |
+    - Khách sạn có bãi đổ xe không
+    - Chỗ đậu xe của khách sạn ở đâu
+    - Bãi đậu xe của khách sạn ở đâu
+    - Chỗ đậu xe của khách sạn ở đâu
+
+- intent: faq_swimming_pool
+  examples: |
+    - Khách sạn có bể bơi không
+    - Có bể bơi ở khách sạn không
+    - Khách sạn có hồ bơi không
+
+- intent: faq_address_hotel
+  examples: |
+    - Địa chỉ khách sạn Akino ở đâu?
+    - Địa chỉ?
+    - Chỗ nào vậy ?
+    - Khách sạn ở đâu?
+    - Khách sạn nằm ở vị trí nào?
+    - Vị trí khách sạn?
+    - Khách sạn nằm chỗ nào?
+    - Akino ở đâu?
+    - Cho tôi biết khách sạn nó nằm ở đâu?
+    - Tôi biết nó ở chỗ nào được?
+    - Tôi cần địa chỉ để đến khách sạn được
+    - Hãy cho tôi biết địa chỉ khách sạn
+    - Giá như tôi biết vị trí khách sạn
+    - Bạn có thể đưa tôi địa chỉ khách sạn chứ?
+    - Hãy gửi tôi thông tin về địa chỉ khách sạn của bạn?
+
+- intent: faq_wifi
+  examples: |
+    - Khách sạn có wifi không
+    - Wifi
+    - Tôi muốn hỏi wifi của khách sạn
+    - Khách sạn có cung cấp wifi miễn phí không
+    - Mạng internet
+    - Khách sạn có mạng không
+    - Khách sạn có mạng miễn phí không
+
+- intent: faq_baby_care
+  examples: |
+    - Khách sạn có dịch vụ chăm sóc trẻ không
+    - Dịch vụ chăm sóc trẻ 
+    - Khách sạn có dịch vụ trông trẻ hay không
+    - Dịch vụ trông trẻ
+    - Tôi muốn hỏi dịch vụ trông trẻ của khách sạn
+    - Dịch vụ trông trẻ của khách sạn
+    - Dịch vụ chăm sóc trẻ em của khách sạn
+
+- intent: faq_baby_policy
+  examples: |
+    - Trong chính sách của khách sạn, độ tuổi nào được tính là trẻ em
+    - Trẻ em có được miễn phí không
+    - Có những ưu đãi gì cho trẻ em không
+    - Chính sách cho trẻ em
+    - Trẻ em có những chính sách gì
+    - Chính sách của khách sạn cho trẻ em
+    - Chính sách cho trẻ em của khách sạn
+
+- intent: faq_hotel_info
+  examples: |
+    - Tôi muốn hỏi thông tin của khách sạn
+    - Thông tin cơ bản về khách sạn
+    - Tôi muốn hỏi thông tin cơ bản của khách sạn
+    - Thông tin của khách sạn
+    - Tôi muốn biết thông tin của khách sạn
+
+- intent: faq_gym
+  examples: |
+    - Khách sạn có phòng tập thể hình không
+    - Phòng tập gym
+    - Phòng tập thể hình
+    - Khách sạn có phòng tập gym không
+    - Phòng gym
+    - Phòng gym ở đâu?
+    - Có phòng gym không?
+    - Thời gian mở cửa phòng gym ?
+    - Giá mỗi giờ tập gym là bao nhiêu?
+    - Dịch vụ phòng gym có được chọn gói khi thuê phòng không ?
+
+
+- intent: vip_room_details
+  examples: |
+    - vip room
+    - phòng vip
+    - tôi muốn hỏi thông tin về phòng vip
+
+- intent: luxury_suite_room_details
+  examples: |
+    - Luxury suite room
+    - Phòng luxury suite 
+    - luxury
+    - suite
+    - Tôi muốn hỏi thông tin về phòng luxury suite
+
+- intent: twin_room_details
+  examples: |
+    - Twin room
+    - Phòng twin
+    - Phòng 2 giường đơn
+    - Cho tôi hỏi về phòng có 2 giường đơn của khách sạn
+
+- intent: double_room_details
+  examples: |
+    - Double room
+    - Phòng đôi
+    - Phòng double
+    - Tôi muốn hỏi về phòng double của khách sạn
+    
+- intent: book_room
+  examples: |
+    - Đặt phòng như nào nhỉ?
+    - Bên khách sạn còn phòng chống chứ?
+    - Cho anh đặt phòng được không?
+    - Đặt phòng
+    - Cho chị đặt phòng được không
+    - Cho anh đặt phòng
+    - Cho chị đặt phòng
+    - Cho cô đặt phòng
+    - Cho chú đặt phòng
+    - Đặt phòng qua app được không?
+    - Làm sao để đặt phòng?
+    - Đặt phòng nhanh không?
+    - Thủ tục đặt phòng có phức tạp không?
+    - Một người đặt được nhiều phòng chứ?
+    - Phòng nào anh dùng được ?
+    - Phòng nào chị dùng được?
+    - Phòng nào cô dùng được?
+    - Phòng nào chú dùng được ?
+
+
+- intent: rooms
+  examples: |
+    - Khách sạn có những loại phòng nào
+    - Các loại phòng nào đang có sẵn
+    - Khách sạn cung cấp những loại phòng nào
+    - Khách sạn có những loại phòng nào
+
+- intent: faq_website_hotel
+  examples: |
+    - Khách sạn có trang web chứ?
+    - Khách sạn có fanpage chứ?
+    - Khách sạn có đường dẫn thông tin trên mạng không?
+    - Các phương tiện liên lạc với khách sạn qua mạng là gì?
+    - Về fanpage thì sao?
+    - Xem web khách sạn qua đường dẫn nào?
+    - Về web của khách sạn thì sao?
+
+

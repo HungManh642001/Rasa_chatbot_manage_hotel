@@ -1,0 +1,755 @@
+#### This file contains tests to evaluate that your bot behaves as expected.
+#### If you want to learn more, please see the docs: https://rasa.com/docs/rasa/testing-your-assistant
+
+stories:
+- story: interactive
+  steps: 
+    - user: |
+        - chào
+        - bot ơi
+        - mình muốn hỏi chút
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - tôi muốn đặt phòng
+        - cho tôi đặt phòng
+        - Đặt phòng như nào nhỉ?
+        - Bên khách sạn còn phòng chống chứ?
+        - Cho anh đặt phòng được không?
+        - Đặt phòng
+        - Cho chị đặt phòng được không
+        - Cho anh đặt phòng
+        - Cho chị đặt phòng
+        - Cho cô đặt phòng
+        - Cho chú đặt phòng
+        - Đặt phòng qua app được không?
+        - Làm sao để đặt phòng?
+        - Đặt phòng nhanh không?
+        - Thủ tục đặt phòng có phức tạp không?
+        - Một người đặt được nhiều phòng chứ?
+        - Phòng nào anh dùng được ?
+        - Phòng nào chị dùng được?
+        - Phòng nào cô dùng được?
+        - Phòng nào chú dùng được ?
+    - intent: book_room
+    - action: book_room_form
+
+    
+- story: greet
+  steps:
+    - user: |
+        - chào
+        - bot ơi
+        - mình muốn hỏi chút
+      intent: greet
+    - action: utter_greet
+
+- story: goodbye
+  steps:
+    - user: |
+        - bye bye
+        - tạm biệt bạn
+        - tạm biệt em
+        - tạm biệt bot
+        - tạm biệt
+        - see you later
+        - bye
+        - goodbye
+        - tạm biệt bot nhá
+        - tạm biệt bạn nha
+        - gặp sau nha
+        - hẹn lần khác
+        - lúc khác nói tiếp sau
+        - thôi nha
+        - gặp sau
+        - tạm biệt admin
+    - intent: goodbye
+    - action: utter_goodbye
+
+- story: faq check in time affirm
+  steps:
+    - user: |
+        - chào
+        - bot ơi
+        - mình muốn hỏi chút
+      intent: greet
+    - action: utter_greet
+    - user: |
+        - Thời gian check in
+        - Thời gian nhận phòng như thế nào?
+        - Bắt đầu nhận phòng từ mấy giờ được vậy bạn?
+        - Có thể nhận phòng từ mấy giờ?
+        - Thời gian nhận phòng từ lúc nào
+        - Bạn có thể cho tôi biết thời gian nhận phòng không
+        - Thời gian nhận phòng của khách sạn
+        - Khi nào tôi có thể nhận phòng
+        - Bạn có thể cho tôi biết khi nào nhận phòng không?
+        - Khi nào nhận phòng?
+        - Nhận phòng
+        - Check in
+        - Thủ tục check in như nào ?
+        - Làm sao để check in ?
+        - Check in ở đâu ?
+        - Check in có phức tạp không ?
+        - Check in mọi lúc được chứ ?
+        - Check in từng người hay đại diện nhỉ ?
+        - Check in chậm hay nhanh ?
+        - Có thể check in qua app không ?
+      intent: faq_check_in_time
+    - action: utter_check_in_time
+    - intent: thankyou
+    - action: utter_thankyou 
+
+
+- story: faq check out time 
+  steps:
+    - user: |
+        - chào
+        - Hello
+        - Hey
+        - Có ai ở đây không?
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Thời gian check out
+        - Thời gian trả phòng như thế nào?
+        - Bắt đầu trả phòng từ mấy giờ được vậy bạn
+        - Có thể trả phòng từ mấy giờ
+        - Thời gian trả phòng từ mấy giờ
+        - Bạn có thể cho tôi biết thời gian trả phòng không
+        - Cho tôi biết thời gian trả phòng
+        - Khi nào tôi phải trả phòng
+        - Khi nào trả phòng 
+        - Thời gian trả phòng
+        - Trả phòng
+        - Check out
+        - Thủ tục check out như nào ?
+        - Thủ tục check out làm sao?
+        - Thủ tục check out đúng là gì?
+        - Làm sao để check out?
+        - Check out hợp lệ kiểu gì?
+        - Check out ở đâu?
+        - Nhân viên có hướng dẫn check out không?
+        - Check out có phức tạp không?
+        - Check out mọi lúc được chứ?
+        - Check out từng người hay đại diện nhỉ ?
+        - Check out chậm hay nhanh?
+        - Có thể check out qua app không?
+    - intent: faq_check_out_time
+    - action: utter_check_out_time
+    - user: |
+        - Cảm ơn bạn
+        - Cảm ơn bạn nhé
+        - Cảm ơn nhiều
+        - Cảm ơn nhiều nhé
+        - Cảm ơn
+        - Cảm ơn vì sự tận tâm này
+        - Cảm ơn đã giúp đỡ
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq cancel reservation affirm
+  steps:
+    - user: |
+        - Chào buổi chiều
+        - Mình có vài câu hỏi
+        - Có ai ở đây không
+        - Có ai giúp mình không
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Làm thế nào để hủy phòng?
+        - Tôi muốn hủy phòng đã đặt
+        - Hủy phòng tôi đã đặt trước đó đi thì làm thế nào?
+        - Tôi muốn hủy đặt phòng mà tôi đã thực hiện
+        - Hủy đặt phòng của tôi mà tôi đã thực hiện trước đó
+        - Tôi muốn hủy phòng mình đã đặt
+        - Làm thế nào để hủy phòng tôi đã đặt
+        - Tôi có thể hủy đặt phòng của mình không
+        - Hủy đặt phòng của tôi
+    - intent: faq_cancel_reservation
+    - action: utter_cancel_reservation
+    - user: |
+        - Cảm ơn đã giúp đỡ
+        - Cảm ơn sự phục vụ chu đáo của bạn
+        - Hãy nhận lời cảm ơn của tôi
+        - Thanks!
+        - Thank you!
+        - Cảm ơn rất nhiều
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq cancel policy affirm
+  steps:
+    - user: |
+        - Xin chào
+        - Bạn gì đó ơi?
+        - Có ai ở đây không nhỉ?
+        - Chào bạn
+        - Không phiền nếu tôi hỏi chứ?
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Chính sách hủy phòng là gì
+        - Bạn có thể cho tôi biết chính sách hủy phòng
+        - Tôi muốn biết chính sách hủy phòng của khách sạn
+        - Bạn có bất kỳ chính sách hủy bỏ nào không
+        - Tôi muốn xem chính sách hủy của bạn
+        - Chính sách hủy phòng ở đâu
+        - Tôi muốn hỏi về chính sách hủy đặt phòng
+        - chính sách của khách sạn về hủy đặt phòng là gì
+    - intent: faq_cancel_policy
+    - action: utter_cancel_policy
+    - user: |
+        - Cảm ơn bạn
+        - Cảm ơn bạn nhé
+        - Cảm ơn nhiều
+        - Cảm ơn nhiều nhé
+        - cảm ơn bot nha
+        - thanks bot
+        - cảm ơn
+        - thank you so much
+        - great! Thanks
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq restaurant affirm
+  steps:
+    - user: |
+        - hi
+        - bot ơi, cho mình hỏi
+        - cho mình hỏi chút
+        - admin ơi cho mình hỏi chút
+        - ad ơi cho mình hỏi chút
+        - anh ơi
+        - em ơi
+        - chào ad
+        - chào bạn
+        - hi bot
+        - hey
+        - xin chào
+        - cho tôi hỏi một chút
+        - hello
+        - chào em  
+        - em ơi, cho anh hỏi chút
+        - Tôi muốn hỏi 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có nhà hàng không
+        - khách sạn dịch vụ nhà hàng không
+        - cho tôi hỏi khách sạn có nhà hàng nào không
+        - Khách hàng phản hồi dịch vụ nhà hàng thế nào?
+        - Tổng thể chất lượng nhà hàng sao?
+        - Feedback từ khách hàng về nhà hàng như thế nào?
+        - Cho tôi biết chất lượng nhà hàng được không?
+        - Chất lượng nhà hàng chắc rất tốt nhỉ?
+    - intent: faq_restaurant
+    - action: utter_restaurant
+    - user: |
+        - ok
+        - okay 
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq restaurant time affirm
+  steps:
+    - user: |
+        - Chào
+        - tôi hỏi chút
+        - Hello 
+        - Tôi cần giúp đỡ
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Thời gian của nhà hàng là gì
+        - cho tôi biết thời gian của nhà hàng
+        - Nhà hàng khi nào đóng cửa
+        - Mấy giờ nhà hàng đóng cửa
+        - Mấy giờ nhà hàng mở cửa
+        - Nhà hàng mở cửa lúc nào
+        - Nhà hàng mở cửa đến mấy giờ?
+        - Nhà hàng có mở cửa cả ngày không?
+        - Nhà hàng có đóng cửa muộn chứ?
+    - intent: faq_restaurant_time
+    - action: utter_restaurant_time
+    - user: |
+        - cảm ơn đã giúp đỡ
+        - cảm ơn câu trả lời
+        - cảm ơn nhiều nhé
+        - thanks
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq breakfast affirm
+  steps:
+    - user: |
+        - hi
+        - bot ơi, cho mình hỏi
+        - cho mình hỏi chút
+        - admin ơi cho mình hỏi chút
+        - ad ơi cho mình hỏi chút
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có phục vụ bữa sáng không?
+        - Bữa sáng có được miễn phí không
+        - Có bữa sáng miễn phí không
+        - Có bao gồm bữa sáng không
+        - Dịch vụ đã bao gồm bữa sáng chưa
+        - Bữa sáng
+        - Chúng tôi sẽ ăn sáng như thế nào?
+        - Chúng tôi sẽ ăn sáng ở đâu?
+        - Khu vực ăn sáng
+        - Khu vực ăn sáng thì sao?
+        - Ai sẽ hướng dẫn chúng tôi ăn sáng?
+        - Nhân viên phục vụ ăn sáng chứ?
+        - Thông tin về bữa sáng được thông báo ở đâu?
+        - Thực đơn sáng có những gì?
+        - Thực đơn ăn sáng thì sao
+        - Thực đơn sáng sẽ thay đổi từng ngày chứ?
+        - Ăn sáng thì sao?
+        - Ăn sáng
+        - Bữa sáng
+        - Bữa sáng thì sao?
+        - Có café sáng chứ?
+        - Có sữa vào buổi sáng không?
+        - Có đồ uống gì vào buổi sáng?
+        - Bữa sáng đầy đủ chứ?
+        - Khách sạn có chuẩn bị bữa sáng cho khách không?
+    - intent: faq_breakfast
+    - action: utter_breakfast
+    - user: |
+        - cảm ơn em nhá
+        - thanks em nha
+        - cảm ơn nha
+        - good job
+        - thank you
+        - cảm ơn bot nha
+        - thanks bot
+    - intent: thankyou
+    - action: utter_thankyou 
+
+
+- story: faq breakfast time affirm
+  steps:
+    - user: |
+        - chào
+        - tôi cần giúp đỡ
+        - cho tôi hỏi chút
+        - chào bạn
+        - tôi muốn hỏi 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Bữa sáng bắt đầu từ khi nào
+        - Cho tôi biết thời gian của bữa sáng
+        - Thời gian của bữa sáng là khi nào
+        - Tôi có thể ăn sáng từ mấy giờ
+        - Bữa sáng bắt đầu từ mấy giờ
+        - Bữa sáng kết thúc từ mấy giờ
+        - Bữa sáng được phục vụ đến mấy giờ
+        - Bữa sáng được phục vụ sớm hay muộn
+        - Tôi có thể bắt đầu dùng bữa sáng từ khi nào/
+        - Đến 9h liệu còn bữa sáng không?
+        - Lúc 7h có bữa sáng rồi chứ?
+    - intent: faq_breakfast_time
+    - action: utter_breakfast_time
+    - user: |
+        - cảm ơn
+        - Thanks
+        - ok
+        - đa tạ 
+        - xie xie
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq reception policy affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_reception_time
+    - action: utter_reception_time
+    - intent: faq_contact_number
+    - action: utter_contact_number
+    - intent: thankyou
+    - action: utter_thankyou 
+    
+- story: faq pet policy
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - intent: faq_pet_policy
+    - action: utter_pet_policy
+    - intent: faq_pet_care_cost
+    - action: utter_pet_care_cost
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq nearest airport affirm
+  steps:
+    - user: |
+        - Hi
+        - Hello
+        - Hey
+        - ?
+        - Xin chào
+        - Bạn gì đó ơi?
+        - Có ai ở đây không nhỉ?
+
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có gần sân bay không
+        - sân bay có gần đó không
+        - Khách sạn cách sân bay gần nhất bao xa
+        - Thời gian di chuyển đến sân bay gần nhất
+        - sân bay gần nhất cách bao xa
+        - Sân bay gần nhất cách bao nhiêu
+        - khách sạn cách sân bay gần nhất bao nhiêu thời gian di chuyển
+        - sân bay gần nhất
+    - intent: faq_nearest_airport
+    - action: utter_nearest_airport
+    - user: |
+        - thank you
+        - cảm ơn đã giúp
+        - cảm ơn đã trả lời
+        - cảm ơn đã giúp tôi nắm rõ
+        - cảm ơn
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq contact number
+  steps: 
+    - user: |
+        - Số điện thoại của khách sạn là gì
+        - Số điện thoại hotline của khách sạn là gì
+        - Khi tôi gặp vấn đề gấp cần phải liên lạc tới số điện thoại nào
+        - Đường dây nóng của khách sạn là gì
+        - Đường dây nóng là gì
+        - Số điện thoại hotline là gì
+        - Số điện thoại để đặt phòng 
+        - Tôi có thể liên lạc qua số điện thoại nào?
+        - Hotline của khách sạn là gì?
+        - Hotline thì sao?
+        - Để lại số liên lạc nhé
+        - Liên lạc bằng điện thoại được không?
+        - Tôi muốn biết hotline của khách sạn
+        - Bạn có thể cho tôi biết số để liên lạc với nhân viên tư vấn khách sạn không?
+        - Hotline khách sạn là gì?
+        - Nếu tôi muốn gọi khách sạn để tư vấn thì sao?
+        - Hãy cho tôi cách để gọi điện khi cần tư vấn từ khách sạn?
+    - intent: faq_contact_number
+    - action: utter_contact_number
+    
+- story: faq luggage affirm
+  steps:
+    - user: |
+        - Hi
+        - Hello
+        - Hey
+        - ?
+        - Xin chào
+        - Bạn gì đó ơi?
+        - Có ai ở đây không nhỉ?
+        - Chào bạn
+        - Không phiền nếu tôi hỏi chứ?
+        - Chào buổi sáng
+        - Chào buổi tối
+        - Chào buổi chiều
+        - Mình có vài câu hỏi
+        - Có ai ở đây không
+        - Có ai giúp mình không
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có dịch vụ trông giữ đồ không
+        - Khách sạn có cho gửi đồ không
+        - Khách sạn có trông giữ đồ không
+        - Có dịch vụ trông giữ đồ không
+        - dịch vụ gửi đồ của khách sạn như thế nào?
+        - có chỗ gửi đồ không?
+        - tôi có thể gửi đồ ở khách sạn chứ?
+        - có chỗ gửi đồ ở khách sạn không??
+        - khách sạn có gửi đồ được không?
+        - liệu có chỗ gửi đồ ở khách sạn không?
+        - ở đây có chỗ gửi đồ chứ?
+        - tôi có thể gửi đồ ở khách sạn được không?
+        - muốn gửi đồ thì gửi ở khách sạn được không hay phải đi chỗ khác?
+    - intent: faq_luggage
+    - action: utter_luggage
+    - user: |
+        - Cảm ơn bạn
+        - Cảm ơn bạn nhé
+        - Cảm ơn nhiều
+        - Cảm ơn nhiều nhé
+        - Cảm ơn
+        - Cảm ơn vì sự tận tâm này
+        - Cảm ơn đã giúp đỡ
+        - Cảm ơn sự phục vụ chu đáo của bạn
+        - Hãy nhận lời cảm ơn của tôi
+        - Thanks!
+        - Thank you!
+        - Cảm ơn rất nhiều
+        - Rất cảm ơn bạn
+        - Xin cảm ơn
+        - Tôi cảm ơn
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq parking affirm
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có bãi đỗ xe không ?
+        - Chỗ đậu xe ở đâu ?
+        - Chỗ đậu xe của khách sạn ở đâu ?
+        - Bãi đậu xe của khách sạn ở đâu ?
+        - Tôi có thể đậu xe ở đây được không ?
+        - Đậu xe chỗ nào ?
+        - Chỗ đỗ xe ở đâu ?
+        - Bãi đỗ xe của khách sạn ở đâu ?
+        - Chỗ đỗ xe của khách sạn ở đâu ?
+        - Đỗ xe ở đâu ?
+        - Tôi muốn biết chỗ đỗ xe ?
+    - intent: faq_parking
+    - action: utter_parking
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq swimming pool
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có bể bơi không ?
+        - Có bể bơi ở khách sạn không ?
+        - Khách sạn có hồ bơi không ?
+        - Bể bơi thì sao ?
+        - Ở đây có bể bơi không ?
+        - Bể bơi của khách sạn có mở không ?
+        - Có dịch vụ bể bơi không ?
+        - Khách sạn có dịch vụ bể bơi không ?
+        - Tôi muốn có bể bơi ?
+        - Tôi có thể bơi ở đây không ?
+        - Tôi có thể bơi ở khách sạn không ?
+      
+    - intent: faq_swimming_pool
+    - action: utter_swimming_pool
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq address hotel 
+  steps:
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Địa chỉ khách sạn Akino ở đâu?
+        - Địa chỉ?
+        - Chỗ nào vậy ?
+        - Khách sạn ở đâu?
+        - Khách sạn nằm ở vị trí nào?
+        - Vị trí khách sạn?
+        - Khách sạn nằm chỗ nào?
+        - Akino ở đâu?
+        - Cho tôi biết khách sạn nó nằm ở đâu?
+        - Tôi biết nó ở chỗ nào được?
+        - Tôi cần địa chỉ để đến khách sạn được
+        - Hãy cho tôi biết địa chỉ khách sạn
+        - Giá như tôi biết vị trí khách sạn
+        - Bạn có thể đưa tôi địa chỉ khách sạn chứ?
+        - Hãy gửi tôi thông tin về địa chỉ khách sạn của bạn?
+    - intent: faq_address_hotel
+    - action: utter_address_hotel
+    - intent: thankyou
+    - action: utter_thankyou 
+
+- story: faq wifi
+  steps:
+    - intent: greet 
+    - action: utter_greet
+    - user: |
+        - Khách sạn có wifi không
+        - Wifi
+        - Tôi muốn hỏi wifi của khách sạn
+        - Khách sạn có cung cấp wifi miễn phí không
+        - Mạng internet
+        - Khách sạn có mạng không
+        - Khách sạn có mạng miễn phí không
+    - intent: faq_wifi
+    - action: utter_wifi
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq baby care
+  steps: 
+    - intent: greet 
+    - action: utter_greet
+    - user: |
+        - Khách sạn có dịch vụ chăm sóc trẻ không
+        - Dịch vụ chăm sóc trẻ 
+        - Khách sạn có dịch vụ trông trẻ hay không
+        - Dịch vụ trông trẻ
+        - Tôi muốn hỏi dịch vụ trông trẻ của khách sạn
+        - Dịch vụ trông trẻ của khách sạn
+        - Dịch vụ chăm sóc trẻ em của khách sạn
+
+    - intent: faq_baby_care
+    - action: utter_baby_care
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq baby policy affirm
+  steps: 
+    - intent: greet 
+    - action: utter_greet
+    - user: |
+        - Trong chính sách của khách sạn, độ tuổi nào được tính là trẻ em
+        - Trẻ em có được miễn phí không
+        - Có những ưu đãi gì cho trẻ em không
+        - Chính sách cho trẻ em
+        - Trẻ em có những chính sách gì
+        - Chính sách của khách sạn cho trẻ em
+        - Chính sách cho trẻ em của khách sạn
+
+    - intent: faq_baby_policy
+    - action: utter_baby_policy
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq gym
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có phòng tập thể hình không
+        - Phòng tập gym
+        - Phòng tập thể hình
+        - Khách sạn có phòng tập gym không
+        - Phòng gym
+        - Phòng gym ở đâu?
+        - Có phòng gym không?
+        - Thời gian mở cửa phòng gym ?
+        - Giá mỗi giờ tập gym là bao nhiêu?
+        - Dịch vụ phòng gym có được chọn gói khi thuê phòng không 
+    - intent: faq_gym
+    - action: utter_gym
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: faq hotel info
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Tôi muốn hỏi thông tin của khách sạn
+        - Thông tin cơ bản về khách sạn
+        - Tôi muốn hỏi thông tin cơ bản của khách sạn
+        - Thông tin của khách sạn ?
+        - Tôi muốn biết thông tin của khách sạn
+        - Tôi cần thông tin về khách sạn
+        - Tôi có thể lấy thông tin của khách sạn không ?
+        - Về thông tin của khách sạn thì sao ?
+        - Cho tôi chút thông tin về khách sạn
+        - Tôi cần thêm thông tin về nơi này 
+        - Tôi cần lấy thông tin của khách sạn
+
+    - intent: faq_hotel_info
+    - action: utter_hotel_info
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: vip room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - vip room
+        - phòng vip
+        - tôi muốn hỏi thông tin về phòng vip
+        - cho tôi thông tin về phòng vip room
+        - phòng vip ở đây như nào nhỉ ?
+        - ở đây có phòng vip không ?
+        - tôi muốn biết thông tin về phòng vip
+    - intent: vip_room_details
+    - action: utter_vip_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: luxury suite room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Luxury suite room
+        - Phòng luxury suite 
+        - luxury
+        - suite
+        - Tôi muốn hỏi thông tin về phòng luxury suite
+    - intent: luxury_suite_room_details
+    - action: utter_luxury_suite_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: twin room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Twin room
+        - Phòng twin
+        - Phòng 2 giường đơn
+        - Cho tôi hỏi về phòng có 2 giường đơn của khách sạn
+        - Tôi cần thêm thông tin về phòng có 2 giường đơn 
+        - Tôi muốn biết về phòng có 2 giường đơn
+    - intent: twin_room_details
+    - action: utter_twin_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: double room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Double room
+        - Phòng đôi
+        - Phòng double
+        - Tôi muốn hỏi về phòng double của khách sạn
+    - intent: double_room_details
+    - action: utter_double_room_details
+    - intent: thankyou
+    - action: utter_thankyou
+    
+- story: info room
+  steps: 
+    - intent: greet
+    - action: utter_greet
+    - user: |
+        - Khách sạn có những loại phòng nào
+        - Các loại phòng nào đang có sẵn
+        - Khách sạn cung cấp những loại phòng nào
+        - Khách sạn có những loại phòng nào
+        - Có những loại phòng nào ?
+        - Phòng ở khách sạn như nào nhỉ ?
+        - Tôi muốn biết thông tin về phòng ở đây ?
+        - Cho tôi thông tin về phòng của khách sạn 
+    - intent: rooms
+    - action: utter_rooms
+    - intent: thankyou
+    - action: utter_thankyou
+
+- story: hỏi_website
+  steps:
+  - user: |
+      - Khách sạn có trang web chứ?
+      - Khách sạn có fanpage chứ?
+      - Khách sạn có đường dẫn thông tin trên mạng không?
+      - Các phương tiện liên lạc với khách sạn qua mạng là gì?
+      - Về fanpage thì sao?
+      - Xem web khách sạn qua đường dẫn nào?
+      - Về web của khách sạn thì sao?
+
+  - intent: faq_website_hotel
+  - action: utter_website_hotel
